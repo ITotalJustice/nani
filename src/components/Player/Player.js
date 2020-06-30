@@ -405,44 +405,30 @@ class Player extends Component {
   }
 
   onKeyDown(e) {
-
-    // idk if this is needed
-    // i'd imagine that there's already keytypes defined somewhere
-    const keyCode = {
-      space: 32,
-      arrow_left: 37,
-      arrow_up: 38,
-      arrow_right: 39,
-      arrow_down: 40,
-      f: 70,
-      j: 74,
-      l: 76,
-    };
-
-    switch (e) {
-      case keyCode.space:
+    switch (e.key) {
+      case " ":
         this.togglePlay();
         break;
 
-      case keyCode.f:
+      case "f":
         this.toggleFullscreen();
         break;
 
-      case keyCode.arrow_right:
-      case keyCode.l:
+      case "ArrowRight":
+      case "l":
         this.skipSeconds(skipSpeed);
         break;
 
-      case keyCode.arrow_left:
-      case keyCode.j:
+      case "ArrowLeft":
+      case "j":
         this.skipSeconds(-skipSpeed);
         break;
 
-      case keyCode.arrow_up:
+      case "ArrowUp":
         this.modifyVolume(10);
         break;
 
-      case keyCode.arrow_down:
+      case "ArrowDown":
         this.modifyVolume(-10);
         break;
 
@@ -452,7 +438,6 @@ class Player extends Component {
     }
 
     e.preventDefault();
-    // make the controls show
     if (this.controlsRef.current) this.controlsRef.current.toggleVisibility();
   }
 
