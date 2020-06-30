@@ -1,70 +1,74 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
-import { getCategories, getSeriesList } from '../actions'
-import { push } from 'connected-react-router'
-import { Helmet } from 'react-helmet'
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { getCategories, getSeriesList } from "../actions";
+import { push } from "connected-react-router";
+import { Helmet } from "react-helmet";
 
-import SeriesCardCollection from '../components/Collections/SeriesCardCollection'
+import SeriesCardCollection from "../components/Collections/SeriesCardCollection";
 
 class SeriesList extends Component {
-  async componentDidMount () {
-    const { dispatch, type } = this.props
+  async componentDidMount() {
+    const { dispatch, type } = this.props;
     try {
-      const categories = await dispatch(getCategories())
+      const categories = await dispatch(getCategories());
 
-      let genreTags = categories.genre.map(({ tag }) => tag)
-      let seasonTags = categories.season.map(({ tag }) => tag)
+      let genreTags = categories.genre.map(({ tag }) => tag);
+      let seasonTags = categories.season.map(({ tag }) => tag);
 
-      let plainTags = ['simulcast', 'popular', 'newest']
-      let possibleTags = [...plainTags, ...genreTags, ...seasonTags]
+      let plainTags = ["simulcast", "popular", "newest"];
+      let possibleTags = [...plainTags, ...genreTags, ...seasonTags];
 
       if (possibleTags.includes(type)) {
         if (plainTags.includes(type)) {
-          dispatch(getSeriesList(type))
+          dispatch(getSeriesList(type));
         } else {
-          dispatch(getSeriesList(`tag:${type}`))
+          dispatch(getSeriesList(`tag:${type}`));
         }
       } else {
-        dispatch(push('/'))
+        dispatch(push("/"));
       }
     } catch (e) {
-      console.error(e)
+      console.error(e);
     }
   }
 
-  render () {
-    const { list, type, categories } = this.props
-    const loaded = list && list[type]
+  render() {
+    const { list, type, categories } = this.props;
+    const loaded = list && list[type];
 
-    let combinedCategories = []
+    let combinedCategories = [];
     if (Object.keys(categories).length) {
-      combinedCategories = [...categories.genre, ...categories.season]
+      combinedCategories = [...categories.genre, ...categories.season];
     }
     combinedCategories = combinedCategories.reduce((acc, { label, tag }) => {
-      acc[tag] = label
-      return acc
-    }, {})
+      acc[tag] = label;
+      return acc;
+    }, {});
 
     const titles = {
-      simulcast: 'Simulcasts',
-      popular: 'Popular Anime',
-      newest: 'Newest Anime',
-      ...combinedCategories
-    }
+      simulcast: "Simulcasts",
+      popular: "Popular Anime",
+      newest: "Newest Anime",
+      ...combinedCategories,
+    };
     return (
       <Fragment>
         <Helmet defer={false}>
           <title>{`${titles[type]} List`}</title>
         </Helmet>
-        <SeriesCardCollection title={titles[type]} loading={!loaded} series={loaded && list[type].list} />
+        <SeriesCardCollection
+          title={titles[type]}
+          loading={!loaded}
+          series={loaded && list[type].list}
+        />
       </Fragment>
-    )
+    );
   }
 }
 
 export default connect((store) => {
   return {
     list: store.Data.list,
-    categories: store.Data.categories
-  }
-})(SeriesList)
+    categories: store.Data.categories,
+  };
+})(SeriesList);

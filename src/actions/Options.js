@@ -25,19 +25,9 @@ export const setTheme = (theme) => ({
   payload: theme
 })
 
-export const TOGGLE_AUTO_THEME = 'TOGGLE_AUTO_THEME'
-export const toggleAutoTheme = () => ({
-  type: TOGGLE_AUTO_THEME
-})
-
 export const SET_HOMEPAGE_CONTINUE_COUNT = 'SET_HOMEPAGE_CONTINUE_COUNT'
 export const setHomepageContinueCount = (count) => ({
   type: SET_HOMEPAGE_CONTINUE_COUNT,
   payload: count
-})
-
-export const TOGGLE_PREMIUM_ALERT = 'TOGGLE_PREMIUM_ALERT'
-export const togglePremiumAlert = () => ({
-  type: TOGGLE_PREMIUM_ALERT
 })
 

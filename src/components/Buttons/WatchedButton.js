@@ -1,80 +1,85 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { getQueue, updatePlaybackTime } from '../../actions'
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getQueue, updatePlaybackTime } from "../../actions";
 
-import { Badge, Button } from 'reactstrap'
+import { Badge, Button } from "reactstrap";
 
-import classNames from 'classnames'
+import classNames from "classnames";
 
 class WatchedButton extends Component {
-  constructor (props) {
-    super(props)
-    this.handle = this.handle.bind(this)
+  constructor(props) {
+    super(props);
+    this.handle = this.handle.bind(this);
 
     this.state = {
-      visible: false
-    }
+      visible: false,
+    };
   }
 
-  componentDidMount () {
-    this.refreshVisible()
+  componentDidMount() {
+    this.refreshVisible();
   }
 
-  componentDidUpdate (prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.media.media_id !== this.props.media.media_id) {
-      this.refreshVisible()
+      this.refreshVisible();
     }
   }
 
-  refreshVisible () {
-    const { media } = this.props
-    if (media.playhead !== null && media.duration && media.playhead !== media.duration) {
-      this.setState({ visible: true })
+  refreshVisible() {
+    const { media } = this.props;
+    if (
+      media.playhead !== null &&
+      media.duration &&
+      media.playhead !== media.duration
+    ) {
+      this.setState({ visible: true });
     }
   }
 
-  async handle (e) {
-    e.preventDefault()
-    const { dispatch, media, refreshQueue } = this.props
-    const { media_id: mediaId, duration } = media
+  async handle(e) {
+    e.preventDefault();
+    const { dispatch, media, refreshQueue } = this.props;
+    const { media_id: mediaId, duration } = media;
     try {
-      await dispatch(updatePlaybackTime(duration, mediaId))
+      await dispatch(updatePlaybackTime(duration, mediaId));
       if (refreshQueue) {
-        await dispatch(getQueue(true))
+        await dispatch(getQueue(true));
       }
-      this.setState({ visible: false })
+      this.setState({ visible: false });
     } catch (err) {
-      console.error(err)
+      console.error(err);
     }
   }
 
-  render () {
-    const { visible } = this.state
+  render() {
+    const { visible } = this.state;
     // grab some unnecessary props to make them not go into the tag (because of ...props)
-    const { dispatch, media, className, badge, ...props } = this.props
+    const { dispatch, media, className, badge, ...props } = this.props;
 
-    let Tag, attrs
+    let Tag, attrs;
     if (badge) {
-      Tag = Badge
+      Tag = Badge;
       attrs = {
         ...props,
-        href: '#'
-      }
+        href: "#",
+      };
     } else {
-      Tag = Button
-      attrs = props
+      Tag = Button;
+      attrs = props;
     }
 
     return visible ? (
       <Tag
-        color='light'
+        color="light"
         onClick={this.handle}
-        className={classNames(className, 'mw-100 text-truncate cursor-pointer')
-        } {...attrs}>
+        className={classNames(className, "mw-100 text-truncate cursor-pointer")}
+        {...attrs}
+      >
         Mark as Watched
       </Tag>
-    ) : null
+    ) : null;
   }
 }
 
-export default connect()(WatchedButton)
+export default connect()(WatchedButton);

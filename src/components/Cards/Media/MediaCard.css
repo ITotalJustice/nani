@@ -1,14 +1,15 @@
 .media-card-body > .progress {
-    height: 0.35rem;
-    margin: -8px -8px 0;
-    border-radius: 0;
+  height: 0.35rem;
+  margin: -8px -8px 0;
+  border-radius: 0;
 }
 
 .box-shadow {
-    box-shadow: none;
-    transition: .10s box-shadow ease-in-out;
+  box-shadow: none;
+  transition: 0.1s box-shadow ease-in-out;
 }
 
-.box-shadow:hover, .box-shadow:focus {
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.box-shadow:hover,
+.box-shadow:focus {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
 }

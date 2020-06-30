@@ -2,7 +2,6 @@ import {
   ADD_ANILIST_ITEM,
   ADD_COLLECTION,
   ADD_COLLECTION_MEDIA,
-  ADD_MAL_ITEM,
   ADD_MEDIA,
   ADD_SERIES,
   ADD_SERIES_COLLECTION,
@@ -15,75 +14,77 @@ import {
   SET_QUEUE,
   SET_RECENT,
   SET_SEARCH_IDS,
-  UPDATE_SERIES_QUEUE
-} from '../actions'
+  UPDATE_SERIES_QUEUE,
+} from "../actions";
 
 export const addToObj = (state, key, data) => ({
   ...state,
   [key]: {
     ...state[key],
-    ...data
-  }
-})
-
-export default function Data (state = {
-  searchIds: [],
-  series: {},
-  seriesCollections: {},
-  media: {},
-  collections: {},
-  collectionMedia: {},
-  history: {
-    offset: 0,
-    data: []
+    ...data,
   },
-  queue: [],
-  list: {},
-  recent: [],
-  languages: [],
-  categories: {},
-  mal: {},
-  anilist: {},
+});
 
-  error: false
-}, action) {
+export default function Data(
+  state = {
+    searchIds: [],
+    series: {},
+    seriesCollections: {},
+    media: {},
+    collections: {},
+    collectionMedia: {},
+    history: {
+      offset: 0,
+      data: [],
+    },
+    queue: [],
+    list: {},
+    recent: [],
+    languages: [],
+    categories: {},
+    anilist: {},
+
+    error: false,
+  },
+  action
+) {
   switch (action.type) {
     case SET_ERROR:
       return {
         ...state,
-        error: action.payload
-      }
+        error: action.payload,
+      };
     case SET_SEARCH_IDS:
       return {
         ...state,
-        searchIds: action.payload
-      }
+        searchIds: action.payload,
+      };
     case SET_QUEUE:
       return {
         ...state,
-        queue: action.payload
-      }
+        queue: action.payload,
+      };
     case SET_HISTORY:
       return {
         ...state,
         history: {
           offset: action.payload.offset,
-          data: action.payload.history
-        }
-      }
+          data: action.payload.history,
+        },
+      };
     case SET_LIST:
       return {
         ...state,
         list: {
           ...state.list,
-          [action.payload.type]: action.payload
-        }
-      }
+          [action.payload.type]: action.payload,
+        },
+      };
     case SET_RECENT:
       return {
         ...state,
-        recent: action.payload
-      }
+        recent: action.payload,
+      };
     case UPDATE_SERIES_QUEUE:
       return {
         ...state,
@@ -91,10 +92,10 @@ export default function Data (state = {
           ...state.series,
           [action.payload.id]: {
             ...state.series[action.payload.id],
-            in_queue: action.payload.inQueue
-          }
-        }
-      }
+            in_queue: action.payload.inQueue,
+          },
+        },
+      };
     case SET_PLAYHEAD_TIME:
       return {
         ...state,
@@ -102,47 +103,39 @@ export default function Data (state = {
           ...state.media,
           [action.payload.id]: {
             ...state.media[action.payload.id],
-            playhead: action.payload.time
-          }
-        }
-      }
+            playhead: action.payload.time,
+          },
+        },
+      };
     case SET_LANGUAGES:
       return {
         ...state,
-        languages: action.payload
-      }
+        languages: action.payload,
+      };
     case SET_CATEGORIES:
       return {
         ...state,
-        categories: action.payload
-      }
-    case ADD_MAL_ITEM:
-      return {
-        ...state,
-        mal: {
-          ...state.mal,
-          [action.payload.id]: action.payload.data
-        }
-      }
+        categories: action.payload,
+      };
     case ADD_ANILIST_ITEM:
       return {
         ...state,
         anilist: {
           ...state.anilist,
-          [action.payload.id]: action.payload.data
-        }
-      }
+          [action.payload.id]: action.payload.data,
+        },
+      };
     case ADD_SERIES:
-      return addToObj(state, 'series', action.payload)
+      return addToObj(state, "series", action.payload);
     case ADD_SERIES_COLLECTION:
-      return addToObj(state, 'seriesCollections', action.payload)
+      return addToObj(state, "seriesCollections", action.payload);
     case ADD_MEDIA:
-      return addToObj(state, 'media', action.payload)
+      return addToObj(state, "media", action.payload);
     case ADD_COLLECTION:
-      return addToObj(state, 'collections', action.payload)
+      return addToObj(state, "collections", action.payload);
     case ADD_COLLECTION_MEDIA:
-      return addToObj(state, 'collectionMedia', action.payload)
+      return addToObj(state, "collectionMedia", action.payload);
     default:
-      return state
+      return state;
   }
 }

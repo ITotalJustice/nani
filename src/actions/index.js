@@ -1,4 +1,3 @@
-export * from './Auth'
-export * from './Data'
-export * from './Options'
-export * from './Manga'
+export * from "./Auth";
+export * from "./Data";
+export * from "./Options";
