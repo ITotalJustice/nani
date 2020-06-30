@@ -12,6 +12,7 @@
     "classnames": "^2.2.6",
     "connected-react-router": "^6.8.0",
     "date-fns": "^2.13.0",
+    "history": "^4.7.2",
     "immutable": "^4.0.0-rc.12",
     "jquery": "^3.5.1",
     "jsonwebtoken": "^8.5.1",
@@ -30,6 +31,7 @@
     "react-player": "^2.0.1",
     "react-popper": "2.2.3",
     "react-redux": "^7.2.0",
+    "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.4.1",
@@ -68,7 +70,6 @@
   "devDependencies": {
     "babel-plugin-module-resolver": "^4.0.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-plugin-transform-react-jsx-source": "^6.22.0",
-    "babel-preset-expo": "^8.2.3"
+    "babel-plugin-transform-react-jsx-source": "^6.22.0"
   }
 }

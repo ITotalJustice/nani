@@ -22,6 +22,9 @@ import { formatTime, isFullscreen } from "../../lib/util";
 
 import "./Player.scss";
 
+// speed at which the video should be skipped forward / back
+const skipSpeed = 15;
+
 const defaultState = {
   id: null,
 
@@ -216,10 +219,10 @@ class Player extends Component {
       navigator.mediaSession.setActionHandler("play", () => this.play());
       navigator.mediaSession.setActionHandler("pause", () => this.pause());
       navigator.mediaSession.setActionHandler("seekbackward", () =>
-        this.skipSeconds(-10)
+        this.skipSeconds(-skipSpeed)
       );
       navigator.mediaSession.setActionHandler("seekforward", () =>
-        this.skipSeconds(10)
+        this.skipSeconds(skipSpeed)
       );
     }
   }
@@ -352,11 +355,8 @@ class Player extends Component {
       else if (el.msExitFullscreen) el.msExitFullscreen();
     };
 
-    if (!isFullscreen()) {
-      requestFullscreen(this.playerContainerRef.current);
-    } else {
-      cancelFullscreen(document);
-    }
+    if (!isFullscreen()) requestFullscreen(this.playerContainerRef.current);
+    else cancelFullscreen(document);
   }
 
   toggleFullscreenState() {
@@ -376,11 +376,8 @@ class Player extends Component {
       const Hls = this.playerRef.current.getInternalPlayer("hls");
 
       if (Hls) {
-        if (quality === "auto") {
-          Hls.currentLevel = -1;
-        } else {
-          Hls.currentLevel = levels.indexOf(quality);
-        }
+        if (quality === "auto") Hls.currentLevel = -1;
+        else Hls.currentLevel = levels.indexOf(quality);
 
         this.setState({ quality });
       }
@@ -404,35 +401,67 @@ class Player extends Component {
   setVolume(volume) {
     volume = Number(volume);
 
-    if (volume >= 0 && volume <= 1) {
-      this.setState({ volume });
-    }
+    if (volume >= 0 && volume <= 1) this.setState({ volume });
   }
 
   onKeyDown(e) {
     const { keyCode } = e;
 
-    if (keyCode === 32) this.togglePlay(); // space
-    if (keyCode === 70) this.toggleFullscreen(); // f
-    if (keyCode === 39 || keyCode === 76) this.skipSeconds(10); // arrow right or l
-    if (keyCode === 37 || keyCode === 74) this.skipSeconds(-10); // arrow left or j
-    if (keyCode === 38) this.modifyVolume(10); // arrow up
-    if (keyCode === 40) this.modifyVolume(-10); // arrow down
+    // idk if this is needed
+    // i'd imagine that there's already keytypes defined somewhere
+    const keyType = {
+      space: 32,
+      arrow_left: 37,
+      arrow_up: 38,
+      arrow_right: 39,
+      arrow_down: 40,
+      f: 70,
+      j: 74,
+      l: 76,
+    };
 
-    if ([32, 39, 37, 70, 76, 74, 38, 40].includes(keyCode)) {
-      e.preventDefault();
-      // make the controls show
-      if (this.controlsRef.current) this.controlsRef.current.toggleVisibility();
+    switch (keyCode) {
+      case keyType.space:
+        this.togglePlay();
+        break;
+
+      case keyType.f:
+        this.toggleFullscreen();
+        break;
+
+      case keyType.arrow_right:
+      case keyType.l:
+        this.skipSeconds(skipSpeed);
+        break;
+
+      case keyType.arrow_left:
+      case keyType.j:
+        this.skipSeconds(-skipSpeed);
+        break;
+
+      case keyType.arrow_up:
+        this.modifyVolume(10);
+        break;
+
+      case keyType.arrow_down:
+        this.modifyVolume(-10);
+        break;
+
+      // if none of the vaild keys were pressed, exit
+      default:
+        return;
     }
+
+    e.preventDefault();
+    // make the controls show
+    if (this.controlsRef.current) this.controlsRef.current.toggleVisibility();
   }
 
   async onVideoEnd() {
     const { autoPlay } = this.props;
 
     await this.logTime();
-    if (autoPlay) {
-      this.nextEpisode();
-    }
+    if (autoPlay) this.nextEpisode();
   }
 
   nextEpisode() {
@@ -457,7 +486,7 @@ class Player extends Component {
 
     volume += amount;
     if (volume > 1) volume = 1;
-    if (volume === 0) volume = 0;
+    else if (volume === 0) volume = 0;
 
     this.setVolume(volume);
   }
