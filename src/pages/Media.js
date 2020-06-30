@@ -67,9 +67,7 @@ class Media extends Component {
     const { mediaId: nextMedia } = this.state;
     const { mediaId: prevMedia } = prevState;
     // check if the media isn't the same, then load
-    if (nextMedia !== prevMedia) {
-      await this.loadVideo();
-    }
+    if (nextMedia !== prevMedia) await this.loadVideo();
   }
 
   async loadVideo() {

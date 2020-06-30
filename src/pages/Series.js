@@ -56,9 +56,7 @@ class Series extends Component {
     const { seriesId: nextSeries } = this.state;
     const { seriesId: prevSeries } = prevState;
     // check that the next id isn't the same as the old, then load
-    if (nextSeries !== prevSeries) {
-      await this.load();
-    }
+    if (nextSeries !== prevSeries) await this.load();
   }
 
   async load() {

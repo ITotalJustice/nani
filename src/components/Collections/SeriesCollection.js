@@ -27,10 +27,8 @@ class SeriesCollection extends Component {
       await this.load();
 
       const el = document.getElementById(hash);
-      if (hash && el) {
-        // scroll to the hash
-        setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 0);
-      }
+      // scroll to the hash
+      if (hash && el) setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 0);
       this.setState({ expanded: true });
     }
   }
@@ -46,13 +44,9 @@ class SeriesCollection extends Component {
     const { dispatch, id } = this.props;
     this.setState({ expanded: !expanded });
     // load if not loaded
-    if (!loaded) {
-      await this.load();
-    }
+    if (!loaded) await this.load();
     // set the hash if not expanded yet
-    if (!expanded) {
-      dispatch(push(`#collection_${id}`));
-    }
+    if (!expanded) dispatch(push(`#collection_${id}`));
   }
 
   render() {

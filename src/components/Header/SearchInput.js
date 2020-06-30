@@ -90,38 +90,41 @@ class SearchInput extends Component {
 
     let initialSelectedIndex = Number(selectedIndex);
 
-    if (key === "ArrowUp") {
-      // up
-      if (value === "" || value < 3) return;
-      event.preventDefault();
-      selectedIndex -= 1;
-      if (selectedIndex < 0) {
-        selectedIndex = searchIds.length - 1;
-      }
-      this.setState({ selectedIndex });
-    } else if (key === "ArrowDown") {
-      // down
-      if (value === "" || value < 3) return;
-      event.preventDefault();
-      selectedIndex += 1;
-      if (selectedIndex >= searchIds.length) {
-        selectedIndex = 0;
-      }
-      this.setState({ selectedIndex });
-    } else if (key === "Enter") {
-      if (value === "" || value < 3) return;
-      event.preventDefault();
-      const resultId = searchIds[selectedIndex];
-      // add to the history the page and redirect
-      if (resultId) {
-        dispatch(push(`/series/${resultId}`));
-        selectedIndex = 0;
+    switch (key) {
+      case "ArrowUp":
+        if (value === "" || value < 3) return;
+        event.preventDefault();
+        selectedIndex -= 1;
+        if (selectedIndex < 0) selectedIndex = searchIds.length - 1;
         this.setState({ selectedIndex });
-      }
-    } else if (key === "Escape") {
-      // un-focus
-      this.blur();
-      this.setState({ focused: false });
+        break;
+
+      case "ArrowDown":
+        if (value === "" || value < 3) return;
+        event.preventDefault();
+        selectedIndex += 1;
+        if (selectedIndex >= searchIds.length) selectedIndex = 0;
+        break;
+
+      case "Enter":
+        if (value === "" || value < 3) return;
+        event.preventDefault();
+        const resultId = searchIds[selectedIndex];
+        // add to the history the page and redirect
+        if (resultId) {
+          dispatch(push(`/series/${resultId}`));
+          selectedIndex = 0;
+          this.setState({ selectedIndex });
+        }
+        break;
+
+      case "Escape":
+        this.blur();
+        this.setState({ focused: false });
+        break;
+
+      default:
+        break;
     }
 
     const indexDelta = selectedIndex - initialSelectedIndex;
@@ -129,13 +132,11 @@ class SearchInput extends Component {
     if (key === "ArrowUp" || key === "ArrowDown") {
       let id = searchIds[selectedIndex];
 
-      // scroll when needed
-      let shouldScroll = false;
-      if (selectedIndex > 5 && indexDelta > 0) shouldScroll = true;
-      if (selectedIndex < 5 && indexDelta < 0) shouldScroll = true;
-
-      if (shouldScroll) {
-        // check if can scroll
+      // check if should scroll
+      if (
+        (selectedIndex > 5 && indexDelta > 0) ||
+        (selectedIndex < 5 && indexDelta < 0)
+      ) {
         const el = document.getElementById(`search-series-${id}`);
         if (el && typeof el.scrollIntoView === "function") el.scrollIntoView();
       }

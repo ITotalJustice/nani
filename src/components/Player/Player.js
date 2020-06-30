@@ -405,11 +405,10 @@ class Player extends Component {
   }
 
   onKeyDown(e) {
-    const { keyCode } = e;
 
     // idk if this is needed
     // i'd imagine that there's already keytypes defined somewhere
-    const keyType = {
+    const keyCode = {
       space: 32,
       arrow_left: 37,
       arrow_up: 38,
@@ -420,30 +419,30 @@ class Player extends Component {
       l: 76,
     };
 
-    switch (keyCode) {
-      case keyType.space:
+    switch (e) {
+      case keyCode.space:
         this.togglePlay();
         break;
 
-      case keyType.f:
+      case keyCode.f:
         this.toggleFullscreen();
         break;
 
-      case keyType.arrow_right:
-      case keyType.l:
+      case keyCode.arrow_right:
+      case keyCode.l:
         this.skipSeconds(skipSpeed);
         break;
 
-      case keyType.arrow_left:
-      case keyType.j:
+      case keyCode.arrow_left:
+      case keyCode.j:
         this.skipSeconds(-skipSpeed);
         break;
 
-      case keyType.arrow_up:
+      case keyCode.arrow_up:
         this.modifyVolume(10);
         break;
 
-      case keyType.arrow_down:
+      case keyCode.arrow_down:
         this.modifyVolume(-10);
         break;
 

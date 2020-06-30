@@ -28,7 +28,7 @@ class Login extends Component {
     const { mode } = this.state;
     e.preventDefault();
     if (mode === "login") await this.handleLogin();
-    if (mode === "forgot") await this.forgotPassword();
+    else if (mode === "forgot") await this.forgotPassword();
   }
 
   async handleLogin() {
