@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 import { Badge } from "reactstrap";
 
-import Img from "react-image";
+import {Img} from "react-image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -272,9 +272,9 @@ class Media extends Component {
                     >
                       <div className="position-absolute video-image-overlay-left" />
                       <Img
-                        src={
-                          prevMedia.img ||
-                          "https://via.placeholder.com/640x360?text=No+Image"
+                        src={[
+                          prevMedia.img,
+                          "https://via.placeholder.com/640x360?text=No+Image"]
                         }
                         alt={prevMedia.name}
                       />
@@ -289,9 +289,9 @@ class Media extends Component {
                     >
                       <div className="position-absolute video-image-overlay-right" />
                       <Img
-                        src={
-                          nextMedia.img ||
-                          "https://via.placeholder.com/640x360?text=No+Image"
+                        src={[
+                          nextMedia.img,
+                          "https://via.placeholder.com/640x360?text=No+Image"]
                         }
                         alt={nextMedia.name}
                       />

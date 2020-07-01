@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { Card, CardBody, CardImg, CardImgOverlay } from "reactstrap";
 
-import Img from "react-image";
+import { Img } from "react-image";
 
 import QueueButton from "../../Buttons/QueueButton";
 import ImageLoader from "../../Loading/ImageLoader";
@@ -27,10 +27,10 @@ class SeriesCard extends Component {
               tag={Img}
               top
               loader={<ImageLoader height={250} />}
-              src={
-                imgFullURL ||
-                "https://via.placeholder.com/640x960?text=No+Image"
-              }
+              src={[
+                imgFullURL,
+                "https://via.placeholder.com/640x960?text=No+Image",
+              ]}
               alt={data.name}
             />
             <CardImgOverlay className="p-1">

@@ -11,7 +11,7 @@ import {
   Progress,
 } from "reactstrap";
 
-import Img from "react-image";
+import { Img } from "react-image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -69,10 +69,10 @@ class MediaCard extends Component {
                     tag={Img}
                     top
                     loader={<ImageLoader height={125} />}
-                    src={
-                      imgFullURL ||
-                      "https://via.placeholder.com/640x360?text=No+Image"
-                    }
+                    src={[
+                      imgFullURL,
+                      "https://via.placeholder.com/640x360?text=No+Image",
+                    ]}
                     alt={media.name}
                   />
                   <CardImgOverlay className="p-1 pl-4">

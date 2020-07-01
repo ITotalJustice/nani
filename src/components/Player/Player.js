@@ -13,7 +13,7 @@ import localForage from "localforage";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Img from "react-image";
+import { Img } from "react-image";
 
 import Controls from "./Controls";
 import Loading from "../Loading/Loading";
@@ -585,9 +585,10 @@ class Player extends Component {
         {!inited && (
           <div className="player-center-overlay">
             <Img
-              src={
-                poster || "https://via.placeholder.com/1920x1080?text=No+Image"
-              }
+              src={[
+                poster,
+                "https://via.placeholder.com/1920x1080?text=No+Image",
+              ]}
               alt={media.title}
               className="w-100"
             />

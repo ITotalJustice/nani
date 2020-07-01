@@ -9,7 +9,7 @@ import { Helmet } from "react-helmet";
 
 import { Badge, Alert, Card, CardBody } from "reactstrap";
 
-import Img from "react-image";
+import { Img } from "react-image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -163,10 +163,10 @@ class Series extends Component {
                       <div>
                         <Img
                           loader={<ImageLoader height={300} />}
-                          src={
-                            portraitImgFullURL ||
-                            "https://via.placeholder.com/640x960?text=No+Image"
-                          }
+                          src={[
+                            portraitImgFullURL,
+                            "https://via.placeholder.com/640x960?text=No+Image",
+                          ]}
                           alt={series.name}
                           className="img-fluid shadow-sm w-100"
                         />
