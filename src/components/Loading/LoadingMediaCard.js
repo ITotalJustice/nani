@@ -11,8 +11,8 @@ const LoadingMediaCard = ({ width, theme = "light" }) => (
         speed={2}
         height={300}
         width={400}
-        primarycolor={theme === "light" ? "#f3f3f3" : "#38393a"}
-        secondarycolor={theme === "light" ? "#f7f7f7" : "#3e3f3f"}
+        backgroundColor={theme === "light" ? "#f3f3f3" : "#38393a"}
+        foregroundColor={theme === "light" ? "#f7f7f7" : "#3e3f3f"}
       >
         <rect x="0" y="0" rx="5" ry="5" width="400" height="230" />
         <rect x="10" y="240" rx="5" ry="5" width="300" height="25" />

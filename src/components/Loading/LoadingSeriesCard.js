@@ -9,10 +9,8 @@ const LoadingSeriesCard = ({ theme = "light" }) => (
     <Card className="d-inline-block w-100 box-shadow">
       <ContentLoader
         speed={2}
-        height={325}
-        width={200}
-        primarycolor={theme === "light" ? "#f3f3f3" : "#38393a"}
-        secondarycolor={theme === "light" ? "#f7f7f7" : "#3e3f3f"}
+        backgroundColor={theme === "light" ? "#f3f3f3" : "#38393a"}
+        foregroundColor={theme === "light" ? "#f7f7f7" : "#3e3f3f"}
       >
         <rect x="0" y="0" rx="5" ry="5" width="200" height="240" />
         <rect x="10" y="250" rx="5" ry="5" width="100" height="25" />

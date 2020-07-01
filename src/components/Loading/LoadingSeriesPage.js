@@ -31,8 +31,8 @@ class LoadingSeriesPage extends Component {
             speed={2}
             height={1}
             width={1}
-            primarycolor={primary}
-            secondarycolor={secondary}
+            backgroundColor={primary}
+            foregroundColor={secondary}
             preserveAspectRatio={"none"}
           >
             <rect x="0" y="0" rx="0" ry="0" width="1" height="1" />
@@ -50,9 +50,9 @@ class LoadingSeriesPage extends Component {
                       speed={2}
                       height={480}
                       width={300}
-                      primarycolor={primary}
-                      secondarycolor={secondary}
-                      // preserveAspectRatio={'none'}
+                      backgroundColor={primary}
+                      foregroundColor={secondary}
+                      //preserveAspectRatio={'none'}
                     >
                       <rect
                         x="0"
@@ -80,8 +80,8 @@ class LoadingSeriesPage extends Component {
                     speed={2}
                     height={220 + heightAddition}
                     width={500}
-                    primarycolor={primary}
-                    secondarycolor={secondary}
+                    backgroundColor={primary}
+                    foregroundColor={secondary}
                   >
                     {/* title */}
                     <rect x="0" y="0" rx="0" ry="0" width="400" height="40" />
