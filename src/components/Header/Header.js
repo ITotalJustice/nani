@@ -3,7 +3,6 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { logout } from "../../actions";
 import { withRouter, Link } from "react-router-dom";
-
 import {
   Collapse,
   DropdownItem,
@@ -17,12 +16,9 @@ import {
   UncontrolledButtonDropdown,
   UncontrolledDropdown,
 } from "reactstrap";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import SearchInput from "./SearchInput";
 import Options from "./Options";
-
 import "./Header.css";
 
 class Header extends Component {

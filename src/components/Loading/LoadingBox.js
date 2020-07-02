@@ -9,10 +9,10 @@ const LoadingBox = ({ theme = "light" }) => (
     <Card className="d-inline-block w-100 box-shadow">
       <ContentLoader
         speed={2}
-        height={800}
         width={500}
-        backgroundColor={theme === "light" ? "#f3f3f3" : "#38393a"}
-        foregroundColor={theme === "light" ? "#f7f7f7" : "#3e3f3f"}
+        height={800}
+        primaryColor={theme === "light" ? "#f3f3f3" : "#38393a"}
+        secondaryColor={theme === "light" ? "#f7f7f7" : "#3e3f3f"}
         preserveAspectRatio={"none"}
       >
         <rect x="0" y="0" rx="0" ry="0" width="500" height="800" />

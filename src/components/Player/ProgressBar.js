@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-
 import classNames from "classnames";
-
 import { formatTime } from "../../lib/util";
-
 import "./ProgressBar.scss";
 
 class ProgressBar extends Component {

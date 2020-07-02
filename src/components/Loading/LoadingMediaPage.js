@@ -29,10 +29,10 @@ class LoadingMediaPage extends Component {
               {/* main video player */}
               <ContentLoader
                 speed={2}
-                height={1}
                 width={1}
-                backgroundColor={primary}
-                foregroundColor={secondary}
+                height={1}
+                primaryColor={primary}
+                secondaryColor={secondary}
                 preserveAspectRatio={"none"}
               >
                 <rect x="0" y="0" rx="0" ry="0" width="1" height="1" />
@@ -43,10 +43,10 @@ class LoadingMediaPage extends Component {
 
         <ContentLoader
           speed={2}
-          height={70 * multiplier + textHeightAddition * 2}
           width={500}
-          backgroundColor={primary}
-          foregroundColor={secondary}
+          height={70 * multiplier + textHeightAddition * 2}
+          primaryColor={primary}
+          secondaryColor={secondary}
         >
           {/* title */}
           <rect

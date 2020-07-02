@@ -31,8 +31,8 @@ class LoadingSeriesPage extends Component {
             speed={2}
             height={1}
             width={1}
-            backgroundColor={primary}
-            foregroundColor={secondary}
+            primaryColor={primary}
+            secondaryColor={secondary}
             preserveAspectRatio={"none"}
           >
             <rect x="0" y="0" rx="0" ry="0" width="1" height="1" />
@@ -48,11 +48,11 @@ class LoadingSeriesPage extends Component {
                   <div className="sticky-poster">
                     <ContentLoader
                       speed={2}
-                      height={480}
                       width={300}
-                      backgroundColor={primary}
-                      foregroundColor={secondary}
-                      //preserveAspectRatio={'none'}
+                      height={480}
+                      primaryColor={primary}
+                      secondaryColor={secondary}
+                      preserveAspectRatio={"none"}
                     >
                       <rect
                         x="0"
@@ -78,10 +78,10 @@ class LoadingSeriesPage extends Component {
                 <div className="col-sm-8 col-lg-9">
                   <ContentLoader
                     speed={2}
-                    height={220 + heightAddition}
                     width={500}
-                    backgroundColor={primary}
-                    foregroundColor={secondary}
+                    height={220 + heightAddition}
+                    primaryColor={primary}
+                    secondaryColor={secondary}
                   >
                     {/* title */}
                     <rect x="0" y="0" rx="0" ry="0" width="400" height="40" />
