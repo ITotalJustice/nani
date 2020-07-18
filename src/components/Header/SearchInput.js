@@ -7,7 +7,7 @@ import { push } from "connected-react-router";
 
 import { Manager, Reference, Popper } from "react-popper";
 import { DebounceInput } from "react-debounce-input";
-import Img from "react-image";
+import { Img } from "react-image";
 
 import classNames from "classnames";
 
